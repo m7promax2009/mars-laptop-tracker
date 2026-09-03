@@ -17,8 +17,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uz">
-      <body className="antialiased min-h-screen bg-[#070b12] text-slate-100 selection:bg-red-500 selection:text-white">
-        <Toaster position="top-right" richColors theme="dark" />
+      <body className="antialiased min-h-screen bg-[#f4f7fb] text-slate-900 selection:bg-sky-500 selection:text-white">
+        <Toaster position="top-right" richColors theme="light" />
         {children}
       </body>
     </html>

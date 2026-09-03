@@ -9,7 +9,6 @@ import {
   Calendar, 
   CheckCircle2, 
   AlertCircle, 
-  User, 
   RefreshCw,
   Search
 } from "lucide-react";
@@ -71,16 +70,16 @@ export default function HistoryPage() {
           <div className="flex items-center gap-3">
             <Link
               href="/"
-              className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              className="p-2.5 rounded-xl bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors shadow-xs"
             >
               <ArrowLeft className="w-5 h-5" />
             </Link>
             <div>
-              <h1 className="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
-                <History className="w-6 h-6 text-red-500" />
+              <h1 className="text-xl sm:text-2xl font-black text-slate-900 flex items-center gap-2">
+                <History className="w-6 h-6 text-sky-600" />
                 <span>Noutbuklar Harakatlari Tarixi</span>
               </h1>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500 font-medium">
                 Kim qachon noutbuk oldi va qachon topshirdi to'liq hisoboti
               </p>
             </div>
@@ -88,7 +87,7 @@ export default function HistoryPage() {
 
           <button
             onClick={fetchLogs}
-            className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors flex items-center gap-2 text-xs font-semibold"
+            className="p-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition-colors flex items-center gap-2 text-xs font-semibold shadow-xs"
           >
             <RefreshCw className="w-4 h-4" />
             <span className="hidden sm:inline">Yangilash</span>
@@ -97,13 +96,13 @@ export default function HistoryPage() {
 
         {/* Search */}
         <div className="relative mb-6">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-sky-500" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Tarix bo'yicha qidiruv (o'quvchi ismi, noutbuk ID)..."
-            className="w-full pl-10 pr-4 py-2.5 bg-slate-900/80 border border-slate-800 rounded-2xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-red-500"
+            className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-2xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/10 shadow-xs transition-all"
           />
         </div>
 
@@ -111,11 +110,11 @@ export default function HistoryPage() {
         {loading ? (
           <div className="space-y-3">
             {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="h-20 rounded-2xl bg-slate-900/50 border border-slate-800 animate-pulse" />
+              <div key={i} className="h-20 rounded-2xl bg-white border border-slate-200 animate-pulse" />
             ))}
           </div>
         ) : filteredLogs.length === 0 ? (
-          <div className="p-12 text-center rounded-3xl bg-slate-900/40 border border-slate-800 text-slate-400 text-sm">
+          <div className="p-12 text-center rounded-2xl bg-white border border-slate-200 text-slate-500 text-sm shadow-xs">
             Hech qanday harakatlar tarixi topilmadi.
           </div>
         ) : (
@@ -127,22 +126,22 @@ export default function HistoryPage() {
               return (
                 <div
                   key={log._id}
-                  className={`p-4 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
+                  className={`p-4 sm:p-5 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs ${
                     isTaken
-                      ? "bg-red-950/20 border-red-900/40"
+                      ? "bg-rose-50/70 border-red-200 hover:border-red-300"
                       : isReturned
-                      ? "bg-emerald-950/20 border-emerald-900/40"
-                      : "bg-slate-900/60 border-slate-800"
+                      ? "bg-emerald-50/70 border-emerald-200 hover:border-emerald-300"
+                      : "bg-white border-slate-200"
                   }`}
                 >
                   <div className="flex items-center gap-3.5">
                     <div
-                      className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                      className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 ${
                         isTaken
-                          ? "bg-red-500/20 text-red-500 border border-red-500/40"
+                          ? "bg-red-100 text-red-600 border border-red-300"
                           : isReturned
-                          ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/40"
-                          : "bg-slate-800 text-slate-300"
+                          ? "bg-emerald-100 text-emerald-600 border border-emerald-300"
+                          : "bg-slate-100 text-slate-600 border border-slate-200"
                       }`}
                     >
                       {isTaken ? (
@@ -155,17 +154,17 @@ export default function HistoryPage() {
                     </div>
 
                     <div>
-                      <div className="flex items-center gap-2">
-                        <span className="font-bold text-white text-sm sm:text-base">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-extrabold text-slate-900 text-sm sm:text-base">
                           {log.studentName}
                         </span>
                         <span
-                          className={`text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-full ${
+                          className={`text-[10px] uppercase font-black px-2.5 py-0.5 rounded-full ${
                             isTaken
-                              ? "bg-red-500/20 text-red-400 border border-red-500/30"
+                              ? "bg-red-100 text-red-700 border border-red-300"
                               : isReturned
-                              ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                              : "bg-slate-800 text-slate-300"
+                              ? "bg-emerald-100 text-emerald-700 border border-emerald-300"
+                              : "bg-slate-100 text-slate-700 border border-slate-200"
                           }`}
                         >
                           {isTaken
@@ -176,10 +175,10 @@ export default function HistoryPage() {
                         </span>
                       </div>
 
-                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-slate-400">
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1 text-xs text-slate-500">
                         {log.laptopId && (
-                          <span className="text-slate-300">
-                            Noutbuk: <strong>{log.laptopId}</strong>
+                          <span className="text-slate-700 font-semibold">
+                            Noutbuk: <strong className="text-slate-900">{log.laptopId}</strong>
                           </span>
                         )}
                         {log.details && <span className="italic text-slate-500">"{log.details}"</span>}
@@ -187,12 +186,12 @@ export default function HistoryPage() {
                     </div>
                   </div>
 
-                  <div className="text-left sm:text-right text-xs text-slate-400 border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-800">
-                    <div className="flex items-center sm:justify-end gap-1 text-slate-300 font-medium">
-                      <Calendar className="w-3.5 h-3.5 text-slate-500" />
+                  <div className="text-left sm:text-right text-xs text-slate-500 border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-200/80">
+                    <div className="flex items-center sm:justify-end gap-1.5 text-slate-700 font-semibold">
+                      <Calendar className="w-3.5 h-3.5 text-sky-500" />
                       <span>{formatDateUz(log.createdAt)}</span>
                     </div>
-                    <span className="text-[11px] text-slate-500">
+                    <span className="text-[11px] text-slate-400">
                       Mas'ul: {log.adminName || "Admin"}
                     </span>
                   </div>

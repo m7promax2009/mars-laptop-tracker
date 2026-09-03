@@ -10,15 +10,10 @@ import { ToggleStatusModal } from "@/components/ToggleStatusModal";
 import { 
   Search, 
   X, 
-  Filter, 
   Download, 
   Plus, 
-  Laptop, 
-  Database, 
   RotateCcw,
-  AlertTriangle,
-  Sparkles,
-  CheckCircle2
+  Sparkles
 } from "lucide-react";
 import { toast } from "sonner";
 import * as XLSX from "xlsx";
@@ -128,7 +123,7 @@ export default function DashboardPage() {
         workbook,
         `Mars_Noutbuklar_${activeFilter}_${new Date().toISOString().slice(0, 10)}.xlsx`
       );
-      toast.success("Excel fayl yuklab olindi!");
+      toast.success("Excel fayl muvaffaqiyatli yuklab olindi!");
     } catch (e) {
       toast.error("Eksport qilishda xatolik");
     }
@@ -151,30 +146,30 @@ export default function DashboardPage() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         {/* Top Notification / Database Banner */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 mb-6 rounded-2xl bg-slate-900/60 border border-slate-800 backdrop-blur-md">
-          <div className="flex items-center gap-2 text-xs">
-            <span className="flex h-2 w-2 relative">
-              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${isMongo ? "bg-emerald-400" : "bg-amber-400"}`} />
-              <span className={`relative inline-flex rounded-full h-2 w-2 ${isMongo ? "bg-emerald-500" : "bg-amber-500"}`} />
+        <div className="flex flex-wrap items-center justify-between gap-3 p-4 mb-6 rounded-2xl bg-white border border-slate-200 shadow-xs">
+          <div className="flex items-center gap-2.5 text-xs">
+            <span className="flex h-2.5 w-2.5 relative">
+              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${isMongo ? "bg-emerald-400" : "bg-sky-400"}`} />
+              <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${isMongo ? "bg-emerald-500" : "bg-sky-500"}`} />
             </span>
-            <span className="text-slate-300 font-medium">
-              Baza holati: <strong>{isMongo ? "MongoDB Atlas (Bulutli)" : "Tezkor Baza (Active Ready)"}</strong>
+            <span className="text-slate-600 font-medium">
+              Baza holati: <strong className="text-slate-900">{isMongo ? "MongoDB Atlas (Bulutli)" : "Tezkor Baza (Active Ready)"}</strong>
             </span>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={handleSeedData}
-              className="text-xs px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors flex items-center gap-1.5"
+              className="text-xs px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition-colors flex items-center gap-1.5"
             >
-              <RotateCcw className="w-3 h-3" />
-              <span>Namuna ma'lumotlarni qayta tiklash</span>
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Namuna ma'lumotlarni tiklash</span>
             </button>
             <button
               onClick={handleExportExcel}
-              className="text-xs px-2.5 py-1 rounded-lg bg-emerald-950/60 border border-emerald-800 text-emerald-300 hover:bg-emerald-900/60 transition-colors flex items-center gap-1.5"
+              className="text-xs px-3 py-1.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 hover:bg-emerald-100 font-semibold transition-colors flex items-center gap-1.5"
             >
-              <Download className="w-3 h-3" />
+              <Download className="w-3.5 h-3.5" />
               <span>Excel Eksport</span>
             </button>
           </div>
@@ -190,22 +185,22 @@ export default function DashboardPage() {
         />
 
         {/* Search & Filter Controls */}
-        <div className="p-4 rounded-3xl bg-slate-900/80 border border-slate-800/80 backdrop-blur-xl mb-6 shadow-xl">
+        <div className="p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm mb-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
             {/* Top Search Input */}
             <div className="md:col-span-6 relative">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-sky-500" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="O'quvchi ismi, telefon, ota-onasi raqami, guruh yoki noutbuk..."
-                className="w-full pl-10 pr-10 py-2.5 bg-slate-950/80 border border-slate-800 rounded-2xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition-all"
+                className="w-full pl-10 pr-10 py-2.5 bg-slate-50/60 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-500/10 transition-all"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white p-1 rounded-full"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 rounded-full"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -213,33 +208,33 @@ export default function DashboardPage() {
             </div>
 
             {/* Quick Status Buttons */}
-            <div className="md:col-span-4 flex items-center gap-1.5 bg-slate-950/80 p-1 rounded-2xl border border-slate-800">
+            <div className="md:col-span-4 flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200">
               <button
                 onClick={() => setActiveFilter("all")}
-                className={`flex-1 py-1.5 rounded-xl text-xs font-semibold transition-all ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all ${
                   activeFilter === "all"
-                    ? "bg-slate-800 text-white shadow"
-                    : "text-slate-400 hover:text-white"
+                    ? "bg-white text-slate-900 shadow-xs"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 Hammasi ({totalCount})
               </button>
               <button
                 onClick={() => setActiveFilter("taken")}
-                className={`flex-1 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1 ${
                   activeFilter === "taken"
-                    ? "bg-red-500 text-white shadow shadow-red-500/20"
-                    : "text-red-400 hover:bg-red-500/10"
+                    ? "bg-red-600 text-white shadow-xs"
+                    : "text-red-600 hover:bg-red-50"
                 }`}
               >
                 🔴 Qarzdorlar ({takenCount})
               </button>
               <button
                 onClick={() => setActiveFilter("returned")}
-                className={`flex-1 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1 ${
                   activeFilter === "returned"
-                    ? "bg-emerald-600 text-white shadow shadow-emerald-500/20"
-                    : "text-emerald-400 hover:bg-emerald-500/10"
+                    ? "bg-emerald-600 text-white shadow-xs"
+                    : "text-emerald-700 hover:bg-emerald-50"
                 }`}
               >
                 🟢 Joyida ({returnedCount})
@@ -251,7 +246,7 @@ export default function DashboardPage() {
               <select
                 value={selectedBranch}
                 onChange={(e) => setSelectedBranch(e.target.value)}
-                className="w-full py-2.5 px-3 bg-slate-950/80 border border-slate-800 rounded-2xl text-xs text-white focus:outline-none focus:border-red-500 cursor-pointer"
+                className="w-full py-2.5 px-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 focus:outline-none focus:border-sky-500 cursor-pointer"
               >
                 <option value="all">Barcha filiallar</option>
                 <option value="Yunusobod">Yunusobod</option>
@@ -268,21 +263,21 @@ export default function DashboardPage() {
         {/* Section Title & Results Count */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <h2 className="text-lg font-bold text-white">
+            <h2 className="text-lg font-black text-slate-900">
               {activeFilter === "taken"
                 ? "🔴 Noutbuk Olgan va Qaytarilmaganlar Ro'yxati"
                 : activeFilter === "returned"
                 ? "🟢 Noutbukni Topshirgan O'quvchilar"
                 : "Barcha O'quvchilar Ro'yxati"}
             </h2>
-            <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 font-semibold border border-slate-700">
+            <span className="text-xs px-2.5 py-0.5 rounded-full bg-sky-100 text-sky-800 font-bold border border-sky-200">
               {filteredStudents.length} ta
             </span>
           </div>
 
           <button
             onClick={() => setIsAddOpen(true)}
-            className="sm:hidden p-2 rounded-xl bg-red-600 text-white font-bold text-xs flex items-center gap-1"
+            className="sm:hidden p-2 rounded-xl bg-sky-600 text-white font-bold text-xs flex items-center gap-1 shadow-sm"
           >
             <Plus className="w-4 h-4" />
             <span>Qo'shish</span>
@@ -293,21 +288,21 @@ export default function DashboardPage() {
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="h-44 rounded-2xl bg-slate-900/50 border border-slate-800 animate-pulse" />
+              <div key={i} className="h-44 rounded-2xl bg-white border border-slate-200 animate-pulse" />
             ))}
           </div>
         ) : filteredStudents.length === 0 ? (
-          <div className="p-12 text-center rounded-3xl bg-slate-900/40 border border-slate-800/60 my-6">
-            <div className="w-16 h-16 rounded-2xl bg-slate-800 flex items-center justify-center text-slate-400 mx-auto mb-3">
+          <div className="p-12 text-center rounded-2xl bg-white border border-slate-200 shadow-xs my-6">
+            <div className="w-16 h-16 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center mx-auto mb-3 border border-sky-100">
               <Search className="w-8 h-8" />
             </div>
-            <h3 className="text-base font-bold text-white mb-1">Mos keluvchi o'quvchi topilmadi</h3>
-            <p className="text-xs text-slate-400 max-w-sm mx-auto mb-4">
+            <h3 className="text-base font-bold text-slate-900 mb-1">Mos keluvchi o'quvchi topilmadi</h3>
+            <p className="text-xs text-slate-500 max-w-sm mx-auto mb-4">
               Qidiruv so'zini o'zgartirib ko'ring yoki yangi o'quvchi qo'shing.
             </p>
             <button
               onClick={() => setIsAddOpen(true)}
-              className="px-4 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white text-xs font-bold transition-all shadow-lg shadow-red-600/30 inline-flex items-center gap-2"
+              className="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition-all shadow-md shadow-sky-600/20 inline-flex items-center gap-2"
             >
               <Plus className="w-4 h-4" />
               <span>Yangi O'quvchi Qo'shish</span>
